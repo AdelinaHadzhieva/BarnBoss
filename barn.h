@@ -1,8 +1,5 @@
 #pragma once
-#include <utility>
-#include <vector>
-class Barn{
-public:
+#include <map>
 enum class Products{
     Wheat,
     Corn,
@@ -12,8 +9,11 @@ enum class Products{
     CornSeed,
     Chicken,
     Cow
-}
+};
+class Barn{
 private:
-std::vector<std::pair<Products,int>> barn;
-
+    std::map<Products,int> barn;
+public:
+    Barn();
+    void info()const;
 };

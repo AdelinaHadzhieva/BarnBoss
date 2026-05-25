@@ -10,6 +10,4 @@ void User::logout(){
 void User::changePassword(const std::string& newPassword){
     password=newPassword;
 }
-void profileInfo(){
-    std::print("ID:{}\nUsername:{}\n", id, username);
-}
+

@@ -12,7 +12,7 @@ class User{
     User(const std::string& username,const std::string& password);
     void logout();
     void changePassword(const std::string& newPassword);
-    void profileInfo();
-
+    virtual void profileInfo()const=0;
+    virtual ~User()=default;
 
 };
