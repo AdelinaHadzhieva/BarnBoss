@@ -1,7 +1,8 @@
 #include "user.h"
 #include <print>
+int User::idConter=0;
 User::User(const std::string& username,const std::string& password)
-:username(username),password(password){
+:username(username),password(password),id(++idCounter){
     isLoggedIn=true;
 }
 void User::logout(){

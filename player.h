@@ -3,6 +3,7 @@
 #include "barn.h"
 #include "farm.h"
 #include <string>
+
 class Player : public User{
     Barn barn;
     Farm farm;
@@ -10,6 +11,7 @@ class Player : public User{
     int score=0;
 public:
     Player(const std::string& name, const std::string& password);
+    void profileInfo()const override;
     int checkBalance()const;
     int checkScore()const;
     void checkBarn()const;
@@ -24,4 +26,5 @@ public:
     void sellItem(int productId, int quantity);
     void showTaskBoard()const;
     void completeTask(int taskId);
+    auto operator<=>(const Player& other)const;
 };

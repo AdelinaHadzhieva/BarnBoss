@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <print>
+#include <memory>
 class User{
     protected:
     static int idCounter;
@@ -13,6 +15,7 @@ class User{
     void logout();
     void changePassword(const std::string& newPassword);
     virtual void profileInfo()const=0;
+    virtual std::unique_ptr<User> clone()=0;
     virtual ~User()=default;
 
 };

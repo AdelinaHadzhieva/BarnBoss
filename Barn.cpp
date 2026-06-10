@@ -12,6 +12,7 @@ Barn::Barn(){
     barn[Products::Cow] = 0;
 }
 void Barn::info()const{
+    std::print("==========\n   BARN   \n==========\n");
     std::print("Wheat:{}\n",barn.at(Products::Wheat));
     std::print("Corn:{}\n",barn.at(Products::Corn));
     std::print("Egg:{}\n",barn.at(Products::Egg));

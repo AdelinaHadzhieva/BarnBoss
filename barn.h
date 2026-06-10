@@ -1,15 +1,6 @@
 #pragma once
 #include <map>
-enum class Products{
-    Wheat,
-    Corn,
-    Egg,
-    Milk,
-    WheatSeed,
-    CornSeed,
-    Chicken,
-    Cow
-};
+#include "products.h"
 class Barn{
 private:
     std::map<Products,int> barn;
