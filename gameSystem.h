@@ -6,5 +6,8 @@
 
 class GameSystem{
     TaskBoard taskboard;
-    Market market
+    Market market;
+    public:
+    GameSystem();
+
 }

@@ -1,22 +1,33 @@
 #include "taskBoard.h"
 
-    TaskBoard::TaskBoard(){
+int Task::idCounter=0;
+    Task::Task(const Products& product, int quantity, int balance, int score)
+    :requiredProduct(product), requiredQuantity(quantity), 
+    rewardBalance(balance), rewardScore(score), id(++idCounter){}
 
-        taskBoard.emplace_back(++id, Products::Wheat, 5, 50, 10);
-        taskBoard.emplace_back(++id, Products::Milk, 3, 120, 20);
+    TaskBoard::TaskBoard(){
+        taskBoard.emplace_back( Products::Wheat, 5, 50, 10);
+        taskBoard.emplace_back( Products::Milk, 3, 120, 20);
     }
-    void showInfo()const{
-        for(const auto& task:taskBoard){
-            std::print("ID:{}  {}x",id,requiredQuantity);
-            switch(task.requiredProduct){
-                case Wheat: std::print("Wheat"); break;
-                case Corn: std::print("Corn"); break;
-                case Egg: std::print("Egg"); break;
-                case Milk: std::print("Milk"); break;
-                case WheatSeed: std::print("WheatSeed"); break;
-                case CornSeed: std::print("CornSeed"); break;
-                case Chicken: std::print("Chicken"); break;
-                case Cow: std::print("Cow"); break;
-            }
-        }  
+void TaskBoard::showInfo()const{
+    for(const auto& task: taskBoard){
+        std::print("ID:{}  {}x{}    {} balance + {} score\n", task.id , task.requiredQuantity, toString(task.requiredProduct), task.rewardBalance, task.rewardScore);
+    }  
+}
+
+void TaskBoard::add(const Products& requiredProduct,
+     int quantity, int rewardBalance, int rewardScore){
+        taskBoard.emplace_back(requiredProduct, quantity, rewardBalance, rewardScore);
+}
+    
+void TaskBoard::remove(int taskId){
+    try{
+        if(taskId < taskBoard.size())
+        taskBoard.erase(taskBoard.begin()+taskId);
+        else throw std::invalid_argument("This task ID doesn't exist!");
     }
+    catch(const std::invalid_argument& e){
+        std::print("{}\n",e.what());
+    }
+    
+}

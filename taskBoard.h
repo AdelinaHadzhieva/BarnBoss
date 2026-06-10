@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 #include "products.h"
+#include <exception>
+#include <print>
 
 struct Task{
     static int idCounter;
@@ -9,6 +11,7 @@ struct Task{
     int requiredQuantity;
     int rewardBalance;
     int rewardScore;
+    Task(const Products& product, int quantity, int balance, int score);
 
 };
 class TaskBoard{
@@ -16,4 +19,6 @@ class TaskBoard{
     public:
     TaskBoard();
     void showInfo()const;
+    void remove(int id);
+    void add(const Products& requiredProduct, int quantity, int rewardBalance, int rewardScore);
 };

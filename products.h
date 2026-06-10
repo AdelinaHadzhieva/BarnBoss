@@ -1,6 +1,8 @@
 #pragma once
+
+#include <string>
 enum class Products{
-    Wheat,
+    Wheat=1,
     Corn,
     Egg,
     Milk,
@@ -9,3 +11,5 @@ enum class Products{
     Chicken,
     Cow
 };
+std::string toString(const Products& product);
+int toID(const Products& product);

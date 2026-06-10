@@ -18,7 +18,7 @@
         barn.info();
     }
     void Player::checkFarm()const{
-        
+        farm.info();
         
     }
     void Player::expandCropland(){
@@ -48,4 +48,9 @@
     void Player::showTaskBoard()const{
 
     }
-    void Player::completeTask(int taskId){}
+    void Player::completeTask(int taskId){
+
+    }
+    auto Player::operator<=>(const Player& other)const{
+
+    }

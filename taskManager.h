@@ -15,7 +15,7 @@ class TaskManager:public User{
     }
     void profileInfo()const override;
     void showTasks(const TaskBoard& taskBoard)const;
-    void addTask(TaskBoard& taskBoard);
-    void removeTask(TaskBoard& taskBoard);
+    void addTask(TaskBoard& taskBoard,Products requiredProduct, int quantity,int rewardBalance,int rewardScore);
+    void removeTask(TaskBoard& taskBoard,int taskId);
 
 };

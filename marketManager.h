@@ -15,6 +15,6 @@ class MarketManager:public User{
     }
     void profileInfo()const override;
     void openMarketCatalog(const Market& market)const;
-    void restock(int productId, int quantity);
-    void changePrice(int productId, int newPrice);
+    void restock(const Market& market,int productId, int quantity);
+    void changePrice(const Market& market,int productId, int newPrice);
 };

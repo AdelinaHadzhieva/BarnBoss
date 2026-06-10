@@ -7,8 +7,9 @@
 class Player : public User{
     Barn barn;
     Farm farm;
-    int balance=100;
-    int score=0;
+    int balance;
+    int score;
+    int currentCycles;
 public:
     Player(const std::string& name, const std::string& password);
     void profileInfo()const override;
