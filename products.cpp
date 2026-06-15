@@ -23,3 +23,6 @@ int toID(const Products& product){
         case Products::Cow: return 8;
     }
 }
+Products productKey(int ID){
+    return static_cast<Products>(ID);
+}

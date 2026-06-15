@@ -4,16 +4,16 @@
 
 class TaskManager:public User{
     private:
-    TaskManager();
-    TaskManager(const TaskManager&)= delete;
-    TaskManager& operator=(const TaskManager&) = delete;
+    static bool TaskManagerExists;
 
     public:
-    static TaskManager& getInstance() {
-        static TaskManager instance;
-        return instance;
-    }
+    TaskManager(const std::string& username,const std::string& password);
+    
     void profileInfo()const override;
+    
+    int getID()const;
+    const std::string& getName()const;
+    void setName(const std::string& userName);
     void showTasks(const TaskBoard& taskBoard)const;
     void addTask(TaskBoard& taskBoard,Products requiredProduct, int quantity,int rewardBalance,int rewardScore);
     void removeTask(TaskBoard& taskBoard,int taskId);

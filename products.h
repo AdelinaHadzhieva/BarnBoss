@@ -13,3 +13,4 @@ enum class Products{
 };
 std::string toString(const Products& product);
 int toID(const Products& product);
+Products productKey(int ID);

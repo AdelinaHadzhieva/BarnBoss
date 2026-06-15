@@ -14,7 +14,8 @@ Market::Market() {
 }
 
 void Market::info() const {
+    std::print("=== MARKET CATALOG ===")
     for(const auto& [key, value] : market) {
-        std::print("{}      {}      {}\n", toString(key), value.quantity, value.price);
+        std::print("{}     |Quantity: {}     |Price: {}\n", toString(key), value.quantity, value.price);
     }
 }

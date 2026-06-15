@@ -1,7 +1,26 @@
 #include "taskManager.h"
+
+bool TaskManager::TaskManagerExists=false;
+
+TaskManager::TaskManager(const std::string& username,const std::string& password)
+:User(username, password),TaskManagerExists(true){}
+
+
+int TaskManager::getID()const{
+    return id;
+}
+const std::string& TaskManager::getName()const{
+    return username;
+}
+void TaskManager::setName(const std::string& userName){
+    username=userName;
+}
+
 void TaskManager::showTasks(const TaskBoard& taskBoard)const{
     taskBoard.showInfo();
-    }
+}
+
+
 void TaskManager::addTask(TaskBoard& taskBoard, Products requiredProduct,
      int quantity, int rewardBalance, int rewardScore){
         taskBoard.add(requiredProduct, quantity, rewardBalance, rewardScore);

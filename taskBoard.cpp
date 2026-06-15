@@ -10,8 +10,9 @@ int Task::idCounter=0;
         taskBoard.emplace_back( Products::Milk, 3, 120, 20);
     }
 void TaskBoard::showInfo()const{
+    std::print("==== TASK BOARD ====")
     for(const auto& task: taskBoard){
-        std::print("ID:{}  {}x{}    {} balance + {} score\n", task.id , task.requiredQuantity, toString(task.requiredProduct), task.rewardBalance, task.rewardScore);
+        std::print("ID:{}  {}x{}  -> Reward:  {} balance + {} score\n", task.id , task.requiredQuantity, toString(task.requiredProduct), task.rewardBalance, task.rewardScore);
     }  
 }
 
