@@ -19,20 +19,27 @@
     void Player::checkFarm()const{ farm.info();}
 
     void Player::expandCropland(){
+        try{
         if(score >= farm.getCropCapacity()*10 && balance >= farm.getCropCapacity()*50){
             balance-=farm.getCropCapacity()*50;
             farm.expandCropCapacity();
             advanceTurn();
         }
-        else std::print("Insufficient funds!");
+        else throw std::underflow_error("Insufficient funds!");
+        }
+        catch(const std::exception& e){std::print("{}\n",e.what());}
+
     }
     void Player::expandFarmland(){
+        try{
         if(score >= farm.getFarmCapacity()*10 && balance >= farm.getFarmCapacity()*50){
             balance-=farm.getFarmCapacity()*50;
             farm.expandFarmCapacity();
             advanceTurn();
         }
-        else std::print("Insufficient funds!");
+        else throw std::underflow_error("Insufficient funds!");
+        }
+        catch(const std::exception& e){std::print("{}\n",e.what());}
     }
     void Player::sowPlant(int seedId){
         try{
@@ -97,7 +104,7 @@
         catch(const std::exception& e){std::print("{}\n",e.what());}
     }
     void Player::showTaskBoard(const TaskBoard& taskBoard)const{
-        taskBoard.showinfo();
+        taskBoard.showInfo();
     }
     
     void Player::advanceTurn() {
@@ -116,7 +123,7 @@
         }
         catch(const std::exception& e){ std::print("{}\n", e.what()); }
     }
-    auto Player::operator<=>(const Player& other)const{
+    std::strong_ordering Player::operator<=> (const Player& other)const{
         if(auto cmp = score <=> other.score; cmp!=0){
             return cmp;
         }

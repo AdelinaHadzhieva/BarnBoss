@@ -1,12 +1,16 @@
 #include "marketManager.h"
 bool MarketManager::MarketManagerExists=false;
 
-MarketManager::MarketManager(const std::string& username,const std::string& password):User(username,password),exists(true){}
+MarketManager::MarketManager(const std::string& username,const std::string& password):
+User(username,password) {
+    MarketManagerExists=true;
+}
+
 int MarketManager::getID()const{
     return id;
 }
 void MarketManager::setName(const std::string& userName){
-    username=userName;
+    username = userName;
 }
 
 

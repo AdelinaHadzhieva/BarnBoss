@@ -3,17 +3,18 @@
 bool TaskManager::TaskManagerExists=false;
 
 TaskManager::TaskManager(const std::string& username,const std::string& password)
-:User(username, password),TaskManagerExists(true){}
-
+:User(username, password) {
+    TaskManagerExists=true;
+}
+void TaskManager::profileInfo()const {
+    std::print("Id: {}\nUsername: {}\nType: Task Manager\n", id, username);
+}
 
 int TaskManager::getID()const{
     return id;
 }
-const std::string& TaskManager::getName()const{
-    return username;
-}
 void TaskManager::setName(const std::string& userName){
-    username=userName;
+    username = userName;
 }
 
 void TaskManager::showTasks(const TaskBoard& taskBoard)const{

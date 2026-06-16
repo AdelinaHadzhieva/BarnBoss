@@ -14,10 +14,10 @@ void User::logout(){
 void User::changePassword(const std::string& newPassword){
     password = newPassword;
 }
-const std::string& MarketManager::getName()const{
+const std::string& User::getName()const{
     return username;
 }
-const std::string& MarketManager::getPass()const{
+const std::string& User::getPass()const{
     return password;
 }
 

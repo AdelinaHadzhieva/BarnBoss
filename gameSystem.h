@@ -1,5 +1,6 @@
 #pragma once
 #include <fstream>
+#include <iostream>
 #include "player.h"
 #include "taskManager.h"
 #include "marketManager.h"
@@ -27,6 +28,8 @@ class GameSystem{
     static GameSystem& getInstance();
     void Register(const std::string& username, const std::string& password, const std::string& type);
     void login(const std::string& username,const std::string& password);
+    void saveToFile()const;
+    void loadFromFile();
     void exit();
     void run();
 };

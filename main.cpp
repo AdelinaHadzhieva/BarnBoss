@@ -1,6 +1,5 @@
 #include "gameSystem.h"
 int main(){
-    GameSystem& game = GameSystem::getInstance();
-    game.run();
+    GameSystem::getInstance().run();
     return 0;
 }

@@ -61,10 +61,10 @@ const std::vector<Animal>& Farm::getFarmland()const{
     return farmland;
 }
 void Farm::harvestPlants(){
-    int removedCount = std::erase_if(cropland, [](const Plant& plant){return plant.currentCycle==plant.requiredCycles;});
+    std::erase_if(cropland, [](const Plant& plant){return plant.currentCycle==plant.requiredCycles;});
 }
 void Farm::harvestAnimals(){
-    int removedCount = std::erase_if(farmland, [](const Animal& animal){return animal.currentCycle==animal.requiredCycles;});
+    std::erase_if(farmland, [](const Animal& animal){return animal.currentCycle==animal.requiredCycles;});
 }
 void Farm::info()const{
     std::print("FarmLand Capacity: {}\nCropLand Capacity: {}\nFarmLand:",farmlandCapacity, croplandCapacity);//to do

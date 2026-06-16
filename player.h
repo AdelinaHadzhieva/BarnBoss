@@ -1,4 +1,5 @@
 #pragma once
+#include <compare>
 #include "user.h"
 #include "barn.h"
 #include "farm.h"
@@ -13,7 +14,7 @@ class Player : public User{
     int currentCycles;
 public:
     Player(const std::string& name, const std::string& password);
-    void getId()const;
+    int getId()const;
     void profileInfo()const override;
     int checkBalance()const;
     int checkScore()const;
@@ -30,5 +31,5 @@ public:
     void sellItem(Market& market, int productId, int quantity);
     void showTaskBoard(const TaskBoard& taskBoard)const;
     void completeTask(TaskBoard& taskBoard, int taskId);
-    auto operator<=>(const Player& other)const;
+    std::strong_ordering operator<=> (const Player& other)const;
 };

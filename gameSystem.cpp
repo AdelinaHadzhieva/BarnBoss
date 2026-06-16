@@ -7,7 +7,7 @@ GameSystem& GameSystem::getInstance(){
 
 void GameSystem::Register(const std::string& username, const std::string& password, const std::string& type){
     if(type == "MarketManager"){
-        if(MarketManager::MarketManagerExists)
+        if(marketManager != nullptr)
             throw std::logic_error("Market Manager already exists!");
         else{
             marketManager = std::make_unique<MarketManager>(username, password);
@@ -16,7 +16,7 @@ void GameSystem::Register(const std::string& username, const std::string& passwo
         }
     }
     else if(type == "TaskManager"){
-        if(TaskManager::TaskManagerExists)
+        if(taskManager != nullptr)
             throw std::logic_error("Task Manager already exists!");
         else{
             taskManager = std::make_unique<TaskManager>(username, password);
@@ -30,7 +30,7 @@ void GameSystem::Register(const std::string& username, const std::string& passwo
                 throw std::invalid_argument("A player with that username already exists!");
             }
         }
-        players.emplace_pack(std::make_unique<Player>(username,password));
+        players.emplace_back(std::make_unique<Player>(username,password));
     }
     else {
         std::print("Unknown user type\n");
@@ -71,15 +71,15 @@ void GameSystem::exit(){
     
 void GameSystem::run(){
     std::string command;
-    
+    std::cout<<"> ";
     while(true)
     {
         std::print("========================================\n");
         std::print("               BARN BOSS                \n");
         std::print("========================================\n>");
-
-        while(std::cin >> command){
+        while(true){
             try{
+                std::cin >> command;
                 if(command == "exit"){
                 break;
                 }
@@ -112,7 +112,7 @@ void GameSystem::run(){
                     marketManager->profileInfo();
                 }
                 else if(command == "openMarketCatalog"){
-                    marketManager->openMarketCatalog();
+                    marketManager->openMarketCatalog(market);
                 }
                 else if(command == "restock"){
                     int id, quantity; std::cin >> id >> quantity;
@@ -128,7 +128,7 @@ void GameSystem::run(){
                     taskManager->profileInfo();
                 }
                 else if(command == "showTasks"){
-                    taskManager->showTasks();
+                    taskManager->showTasks(taskBoard);
                 }
                 else if(command == "addTask"){
                     int quantity, balance, score;
@@ -202,7 +202,7 @@ void GameSystem::run(){
             }
             std::cout<<"> ";
             }
-            catch(const std::exception& e){std::print("{}\n", e.what());}
+            catch(const std::exception& e){std::print("{}.\n", e.what());}
         }
         if(command == "exit"){
             exit();
@@ -210,5 +210,6 @@ void GameSystem::run(){
         }
         
     }
-
+    
 }
+

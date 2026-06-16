@@ -12,7 +12,7 @@ Barn::Barn(){
     barn[Products::Cow] = 0;
 }
 void Barn::info()const{
-    std::print("==========\n   BARN   \n==========\n");
+    std::print("=== BARN ===\n");
     std::print("Wheat:{}\n", barn.at(Products::Wheat));
     std::print("Corn:{}\n", barn.at(Products::Corn));
     std::print("Egg:{}\n", barn.at(Products::Egg));
@@ -27,7 +27,7 @@ void Barn::add(int productID, int quantity){
     
     if(quantity>0 ){
         if(productID >= 0 && productID <= barn.size()){
-            barn[productKey(productID)]+=quantity;
+            barn.at(productKey(productID))+=quantity;
         }
         else throw std::out_of_range("This product ID doesn't exist!\n");
     
@@ -35,9 +35,9 @@ void Barn::add(int productID, int quantity){
     else throw std::out_of_range("You can't add negative quantity to barn!\n");
 }
 void Barn::remove(int productID, int qty){
-    if(productID>=0 && productID<barn.size()){
-        if(barn[productKey(productID)] >= qty)
-            barn[productKey(productID)]-=qty;
+    if(productID >= 0 && productID < barn.size()){
+        if(barn.at(productKey(productID)) >= qty)
+            barn.at(productKey(productID))-=qty;
         else throw std::underflow_error("The quantity of this product is 0!\n");
     }
     else throw std::out_of_range("This product ID doesn't exist!\n");

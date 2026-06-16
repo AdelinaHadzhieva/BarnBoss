@@ -1,5 +1,5 @@
 #include "scoreboard.h"
-std::vector<const Player*> ScoreBoard::sortPlayers(const std::vector<std::unique_ptr<Player>>& players){
+std::vector<Player*> ScoreBoard::sortPlayers(const std::vector<std::unique_ptr<Player>>& players){
     std::vector<Player*> sortedPlayers;
     sortedPlayers.reserve(players.size()); 
 
@@ -22,7 +22,7 @@ void ScoreBoard::scoreBoardInfo(const std::vector<std::unique_ptr<Player>>& play
     std::print("=== SCORE BOARD ===");
     int scoreBoardID=1;
     for(const auto& player:sortedPlayers){
-        std::print("{}", scoreBoardID++);
-        player->profileInfo();
+        std::print("{}. {}      |Score: {}  Balance: {}\n", 
+            player->getId(), player->getName(),player->checkScore(),player->checkBalance());
     }
 }

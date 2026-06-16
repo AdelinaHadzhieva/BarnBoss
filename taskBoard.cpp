@@ -20,6 +20,7 @@ const Task& TaskBoard::getTask(int ID)const{
     for(const auto& task:taskBoard){
         if(task.id == ID)return task;
     }
+    throw std::invalid_argument("This task ID does't exist!");
 }
 
 void TaskBoard::add(const Products& requiredProduct,
@@ -34,7 +35,7 @@ void TaskBoard::remove(int taskId){
             return task.id == taskId;
         });
         if(removedCount==0)
-        else throw std::invalid_argument("This task ID doesn't exist!");
+         throw std::invalid_argument("This task ID doesn't exist!");
     }
     catch(const std::invalid_argument& e){
         std::print("{}\n",e.what());
