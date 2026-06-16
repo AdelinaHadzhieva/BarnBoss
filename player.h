@@ -4,7 +4,6 @@
 #include "farm.h"
 #include "market.h"
 #include "taskBoard.h"
-#include <string>
 
 class Player : public User{
     Barn barn;

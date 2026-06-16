@@ -1,9 +1,6 @@
-#include "barn.h"
-#include "taskBoard.h"
+#include "gameSystem.h"
 int main(){
-    Barn b;
-    b.info();
-    TaskBoard t;
-    t.showInfo();
+    GameSystem& game = GameSystem::getInstance();
+    game.run();
     return 0;
 }

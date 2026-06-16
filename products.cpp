@@ -23,6 +23,17 @@ int toID(const Products& product){
         case Products::Cow: return 8;
     }
 }
+Products stringToProduct(const std::string& product){
+    switch(product) {
+        case "Wheat": return Products::Wheat; 
+        case "Corn": return Products::Corn; 
+        case "Egg": return Products::Egg; 
+        case "Milk": return Products::Milk; 
+        case "WheatSeed": return Products::WheatSeed; 
+        case "CornSeed": return Products::CornSeed;
+        case "Chicken": return Products::Chicken; 
+        case "Cow": return Products::Cow;
+}
 Products productKey(int ID){
     return static_cast<Products>(ID);
 }

@@ -5,9 +5,6 @@ MarketManager::MarketManager(const std::string& username,const std::string& pass
 int MarketManager::getID()const{
     return id;
 }
-const std::string& MarketManager::getName()const{
-    return username;
-}
 void MarketManager::setName(const std::string& userName){
     username=userName;
 }
