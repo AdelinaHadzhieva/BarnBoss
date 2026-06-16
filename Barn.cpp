@@ -26,19 +26,20 @@ void Barn::info()const{
 void Barn::add(int productID, int quantity){
     
     if(quantity>0 ){
-        if( productID>=0 && productID<barn.size()){
-        barn[productKey(productID)]+=quantity;
-        else throw std::out_of_range("This product ID doesn't exist!");
+        if(productID >= 0 && productID <= barn.size()){
+            barn[productKey(productID)]+=quantity;
+        }
+        else throw std::out_of_range("This product ID doesn't exist!\n");
+    
     }
-    }
-    else throw std::out_of_range("You can't add negative quantity to barn!");
+    else throw std::out_of_range("You can't add negative quantity to barn!\n");
 }
-void Barn::remove(int productID){
+void Barn::remove(int productID, int qty){
     if(productID>=0 && productID<barn.size()){
-        if(barn[productKey(productID)].quantity>0)
-            barn[productKey(productID)]--;
-        else throw std::underflow_error("The quantity of this product is 0!");
+        if(barn[productKey(productID)] >= qty)
+            barn[productKey(productID)]-=qty;
+        else throw std::underflow_error("The quantity of this product is 0!\n");
     }
-    else throw std::out_of_range("This product ID doesn't exist!");
+    else throw std::out_of_range("This product ID doesn't exist!\n");
 }
     

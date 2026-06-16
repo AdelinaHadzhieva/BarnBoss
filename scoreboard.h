@@ -4,7 +4,9 @@
 #include <memory>
 #include "player.h"
 class ScoreBoard{
+    std::vector<const Player*> sortPlayers(const std::vector<std::unique_ptr<Player>>& players);
+
     public:
-    void sortPlayers(const std::vector<std::unique_ptr<Player>>& players);
-    void showScoreBoard();
+    
+    void scoreBoardInfo(const std::vector<std::unique_ptr<Player>>& players);
 };

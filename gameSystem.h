@@ -13,6 +13,7 @@ class GameSystem{
     std::vector<std::unique_ptr<Player>> players;
     std::unique_ptr<TaskManager> taskManager;
     std::unique_ptr<MarketManager> marketManager;
+    
     GameSystem();
     GameSystem(const GameSystem& )=delete;
     GameSystem& operator=(const GameSystem&)=delete;

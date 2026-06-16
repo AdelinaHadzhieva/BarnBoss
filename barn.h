@@ -10,5 +10,5 @@ public:
     Barn();
     void info()const;
     void add(int productID, int quantity);
-    void remove(int productID);
+    void remove(int productID, int qty);
 };

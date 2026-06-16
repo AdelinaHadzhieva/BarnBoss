@@ -14,7 +14,7 @@ void MarketManager::setName(const std::string& userName){
 
 
 void  MarketManager::profileInfo()const {
-    std::print("Id: {}\nUsername: {}\nType: Market Manager", id, username);
+    std::print("Id: {}\nUsername: {}\nType: Market Manager\n", id, username);
 }
 void MarketManager::openMarketCatalog(const Market& market)const{
     market.info();
@@ -22,23 +22,23 @@ void MarketManager::openMarketCatalog(const Market& market)const{
 void MarketManager::restock( Market& market,int productId, int quantity){
     try{
     if(productId>0 && productId<market.size()){
-        market[productKey(productId)].quantity += quantity;
+       market.add(productId, quantity);
     }
     else throw std::invalid_argument("This product ID does't exist!");
     }
     catch(const std::invalid_argument& e){
-        std::print("{}",e.what());
+        std::print("{}\n",e.what());
     }
 }
 void MarketManager::changePrice(Market& market,int productId, int newPrice){
     try{
     if(productId>0 && productId<market.size()){
-        market[productKey(productId)].price = newPrice;
+        market.setPrice(productId,newPrice);
     }
     else throw std::invalid_argument("This product ID does't exist!");
     }
     catch(const std::invalid_argument& e){
-        std::print("{}",e.what());
+        std::print("{}\n",e.what());
     }
 
 }

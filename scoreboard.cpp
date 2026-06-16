@@ -1,16 +1,28 @@
 #include "scoreboard.h"
-void ScoreBoard::sortPlayers(const std::vector<std::unique_ptr<Player>>& players){
-    std::sort(players.begin(),players.end(),
-    [](const std::unique_ptr<Player> first,const std::unique_ptr<Player> second){
-        if(first->checkScore()!=second->checkScore()) 
-            return first->checkScore()>second->checkScore();
-        if(first->checkBalance()!=second->checkBalance()) 
-            return first->checkBalance()>second->checkBalance();
-        return first->getId()< second->getId(););
+std::vector<const Player*> ScoreBoard::sortPlayers(const std::vector<std::unique_ptr<Player>>& players){
+    std::vector<Player*> sortedPlayers;
+    sortedPlayers.reserve(players.size()); 
+
+    for (const auto& player : players) {
+        if (player) {
+            sortedPlayers.push_back(player.get());
+        }
+    }
+
+    std::sort(sortedPlayers.begin(),sortedPlayers.end(),
+    [](const Player* first, const Player* second){
+        return *first > *second;
+    });
+
+    return sortedPlayers;
     }
 void ScoreBoard::scoreBoardInfo(const std::vector<std::unique_ptr<Player>>& players){
-    sortPlayers(players);
-    for(const auto& player:players){
+
+    std::vector<Player*> sortedPlayers = sortPlayers(players);
+    std::print("=== SCORE BOARD ===");
+    int scoreBoardID=1;
+    for(const auto& player:sortedPlayers){
+        std::print("{}", scoreBoardID++);
         player->profileInfo();
     }
 }

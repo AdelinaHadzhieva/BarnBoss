@@ -19,6 +19,7 @@ class TaskBoard{
     public:
     TaskBoard();
     void showInfo()const;
+    const Task& getTask(int ID)const;
     void remove(int id);
     void add(const Products& requiredProduct, int quantity, int rewardBalance, int rewardScore);
 };

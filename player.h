@@ -14,20 +14,19 @@ class Player : public User{
     int currentCycles;
 public:
     Player(const std::string& name, const std::string& password);
-    void getScore()const;
-    void getBalance()const;
     void getId()const;
     void profileInfo()const override;
     int checkBalance()const;
     int checkScore()const;
     void checkBarn()const;
     void checkFarm()const;
+    void advanceTurn();
     void expandCropland();
     void expandFarmland();
     void sowPlant(int seedId);
     void addAnimal(int animalId);
     void harvest();
-    void openMarketCatalog(const Market& market);
+    void openMarketCatalog(const Market& market)const;
     void buyItem(Market& market, int productId, int quantity);
     void sellItem(Market& market, int productId, int quantity);
     void showTaskBoard(const TaskBoard& taskBoard)const;

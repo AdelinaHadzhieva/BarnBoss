@@ -12,4 +12,9 @@ class Market{
     public:
     Market();
     void info()const;
+    int getQty(int id)const;
+    int getPrice(int id)const;
+    void setPrice(int price);
+    void add(int productId, int quantity);
+    void remove(int productId, int quantity);
 };

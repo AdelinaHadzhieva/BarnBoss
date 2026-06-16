@@ -11,6 +11,7 @@ struct Plant{
     int price;
     int requiredCycles;
     Products product;
+    int currentCycle=0;
 };
 struct Animal{
     int id;
@@ -18,6 +19,7 @@ struct Animal{
     int price;
     int requiredCycles;
     Products product;
+    int currentCycle=0;
 };
 class Farm{
     std::vector<Plant> cropland;
@@ -30,9 +32,14 @@ class Farm{
     int getFarmCapacity()const;
     int getCropSize()const;
     int getFarmSize()const;
+    const std::vector<Plant>& getCropland()const;
+    const std::vector<Animal>& getFarmland()const;
     void expandFarmCapacity();
     void expandCropCapacity();
     void addSeed(int seedId);
     void addAnimal(int animalId);
+    void harvestPlants();
+    void harvestAnimals();
+    void advanceCycle();
     void info()const;
 };
