@@ -25,7 +25,7 @@
             farm.expandCropCapacity();
             advanceTurn();
         }
-        else throw std::underflow_error("Insufficient funds!");
+        else throw std::underflow_error("Insufficient score or balance!");
         }
         catch(const std::exception& e){std::print("{}\n",e.what());}
 
@@ -37,24 +37,24 @@
             farm.expandFarmCapacity();
             advanceTurn();
         }
-        else throw std::underflow_error("Insufficient funds!");
+        else throw std::underflow_error("Insufficient score or balance!");
         }
         catch(const std::exception& e){std::print("{}\n",e.what());}
     }
     void Player::sowPlant(int seedId){
         try{
             farm.addSeed(seedId);
-            barn.remove(seedId,1);
+            barn.remove(seedId, 1);
             advanceTurn();
         }
         catch(const std::exception& e){
-            std::print("{}", e.what());
+            std::print("{}\n", e.what());
         }
     }
     void Player::addAnimal(int animalId){
         try{
             farm.addAnimal(animalId);
-            barn.remove(animalId,1);
+            barn.remove(animalId + 4, 1);//needs rewriting of products enum
             advanceTurn();
         }
         catch(const std::exception& e){

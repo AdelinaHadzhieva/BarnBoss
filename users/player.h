@@ -1,10 +1,10 @@
 #pragma once
 #include <compare>
 #include "user.h"
-#include "barn.h"
-#include "farm.h"
-#include "market.h"
-#include "taskBoard.h"
+#include "../storage/barn.h"
+#include "../storage/farm.h"
+#include "../storage/market.h"
+#include "../boards/taskBoard.h"
 
 class Player : public User{
     Barn barn;
@@ -12,6 +12,7 @@ class Player : public User{
     int balance;
     int score;
     int currentCycles;
+    void advanceTurn();
 public:
     Player(const std::string& name, const std::string& password);
     int getId()const;
@@ -20,7 +21,7 @@ public:
     int checkScore()const;
     void checkBarn()const;
     void checkFarm()const;
-    void advanceTurn();
+    
     void expandCropland();
     void expandFarmland();
     void sowPlant(int seedId);

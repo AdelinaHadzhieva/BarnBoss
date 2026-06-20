@@ -1,6 +1,6 @@
 #pragma once
 #include "user.h"
-#include "taskBoard.h"
+#include "../boards/taskBoard.h"
 
 class TaskManager:public User{
     private:

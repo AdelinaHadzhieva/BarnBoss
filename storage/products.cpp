@@ -10,7 +10,7 @@ std::string toString(const Products& product){
         case Products::Chicken: return "Chicken"; 
         case Products::Cow: return "Cow";
     }
-    return "";
+    
 }
 int toID(const Products& product){
     switch(product) {
@@ -23,9 +23,8 @@ int toID(const Products& product){
         case Products::Chicken: return 7; 
         case Products::Cow: return 8;
     }
-    return -1;
 }
-Products stringToProduct(const std::string& product) {
+std::optional<Products> stringToProduct(const std::string& product) {
     if (product == "Wheat") return Products::Wheat;
     if (product == "Corn") return Products::Corn;
     if (product == "Egg") return Products::Egg;
@@ -34,8 +33,10 @@ Products stringToProduct(const std::string& product) {
     if (product == "CornSeed") return Products::CornSeed;
     if (product == "Chicken") return Products::Chicken;
     if (product == "Cow") return Products::Cow;
-    return Products::Wheat;
+    return std::nullopt;
 }
-Products productKey(int ID){
-    return static_cast<Products>(ID);
+std::optional<Products> productKey(int ID){
+    if(ID>0 && ID<=8)
+        return static_cast<Products>(ID);
+    else return std::nullopt;
 }

@@ -19,10 +19,10 @@ std::vector<Player*> ScoreBoard::sortPlayers(const std::vector<std::unique_ptr<P
 void ScoreBoard::scoreBoardInfo(const std::vector<std::unique_ptr<Player>>& players){
 
     std::vector<Player*> sortedPlayers = sortPlayers(players);
-    std::print("=== SCORE BOARD ===");
-    int scoreBoardID=1;
+    std::print("=== SCORE BOARD ===\n");
+    int scoreBoardID = 1;
     for(const auto& player:sortedPlayers){
-        std::print("{}. {}      |Score: {}  Balance: {}\n", 
+        std::print("{}. {:<8}      |Score: {}  Balance: {}\n", 
             player->getId(), player->getName(),player->checkScore(),player->checkBalance());
     }
 }

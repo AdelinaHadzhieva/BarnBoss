@@ -2,7 +2,7 @@
 #include <print>
 int User::idCounter=0;
 User::User(const std::string& username,const std::string& password)
-:username(username), id(++idCounter){
+:username(username),password(password), id(++idCounter){
     if(password.size() < 3){
         throw std::invalid_argument("Password must be at least 3 characters!");
     }

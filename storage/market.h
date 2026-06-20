@@ -2,6 +2,7 @@
 #include "products.h"
 #include <map>
 #include <print>
+#include <stdexcept>
 struct ProductDetails{
     int quantity;
     int price;

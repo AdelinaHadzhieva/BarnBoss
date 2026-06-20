@@ -1,10 +1,12 @@
 #pragma once
 #include <fstream>
 #include <iostream>
-#include "player.h"
-#include "taskManager.h"
-#include "marketManager.h"
-#include "scoreboard.h"
+#include "./users/player.h"
+#include "./users/taskManager.h"
+#include "./users/marketManager.h"
+#include "./boards/scoreboard.h"
+#include "./commands/commandFactory.h"
+#include "userType.h"
 
 
 class GameSystem{
@@ -16,7 +18,6 @@ class GameSystem{
     std::unique_ptr<MarketManager> marketManager;
     size_t activePlayer = 0;
 
-    enum class UserType{Guest, Player, TaskManager, MarketManager};
     UserType currentUser = UserType::Guest;
 
     GameSystem() = default;
@@ -24,8 +25,17 @@ class GameSystem{
     GameSystem& operator=(const GameSystem&) = delete;
 
     public:
+    const User* getCurrentUser() ;
+    Player& getActivePlayer();
+    Market& getMarket();
+    TaskBoard& getTaskBoard();
+    const UserType& getCurrentUserType() const;
+    MarketManager& getMarketManager();
+    TaskManager& getTaskManager();
+
 
     static GameSystem& getInstance();
+
     void Register(const std::string& username, const std::string& password, const std::string& type);
     void login(const std::string& username,const std::string& password);
     void saveToFile()const;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <optional>
 enum class Products{
     Wheat=1,
     Corn,
@@ -11,7 +12,8 @@ enum class Products{
     Chicken,
     Cow
 };
+
 std::string toString(const Products& product);
 int toID(const Products& product);
-Products productKey(int ID);
-Products stringToProduct(const std::string& product);
+std::optional<Products> productKey(int ID);
+std::optional<Products> stringToProduct(const std::string& product);

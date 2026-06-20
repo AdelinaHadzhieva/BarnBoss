@@ -1,6 +1,6 @@
 
 #include "barn.h"
-#include <print>
+
 Barn::Barn(){
     barn[Products::Wheat] = 0;
     barn[Products::Corn] = 0;
@@ -26,8 +26,8 @@ void Barn::info()const{
 void Barn::add(int productID, int quantity){
     
     if(quantity>0 ){
-        if(productID >= 0 && productID <= barn.size()){
-            barn.at(productKey(productID))+=quantity;
+        if(productKey(productID).has_value()){
+            barn.at(productKey(productID).value())+=quantity;
         }
         else throw std::out_of_range("This product ID doesn't exist!\n");
     
@@ -35,9 +35,9 @@ void Barn::add(int productID, int quantity){
     else throw std::out_of_range("You can't add negative quantity to barn!\n");
 }
 void Barn::remove(int productID, int qty){
-    if(productID >= 0 && productID < barn.size()){
-        if(barn.at(productKey(productID)) >= qty)
-            barn.at(productKey(productID))-=qty;
+    if(productKey(productID).has_value()){
+        if(barn.at(productKey(productID).value()) >= qty)
+            barn.at(productKey(productID).value())-=qty;
         else throw std::underflow_error("The quantity of this product is 0!\n");
     }
     else throw std::out_of_range("This product ID doesn't exist!\n");

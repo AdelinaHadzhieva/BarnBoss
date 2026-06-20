@@ -10,9 +10,10 @@ int Task::idCounter=0;
         taskBoard.emplace_back( Products::Milk, 3, 120, 20);
     }
 void TaskBoard::showInfo()const{
-    std::print("=== TASK BOARD ===");
+    std::print("=== TASK BOARD ===\n");
     for(const auto& task: taskBoard){
-        std::print("ID:{}  {}x{}  -> Reward:  {} balance + {} score\n", task.id , task.requiredQuantity, toString(task.requiredProduct), task.rewardBalance, task.rewardScore);
+        std::print("ID:{}  {}x{:<8}  -> Reward:  {} balance + {} score\n",
+             task.id , task.requiredQuantity, toString(task.requiredProduct), task.rewardBalance, task.rewardScore);
     }  
 }
 
@@ -31,10 +32,10 @@ void TaskBoard::add(const Products& requiredProduct,
 void TaskBoard::remove(int taskId){
     try{
         
-        int removedCount=std::erase_if(taskBoard, [taskId](const Task& task){
+        int removedCount = std::erase_if(taskBoard, [taskId](const Task& task){
             return task.id == taskId;
         });
-        if(removedCount==0)
+        if(removedCount == 0)
          throw std::invalid_argument("This task ID doesn't exist!");
     }
     catch(const std::invalid_argument& e){

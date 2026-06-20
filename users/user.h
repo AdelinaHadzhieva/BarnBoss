@@ -3,6 +3,7 @@
 #include <print>
 #include <memory>
 #include <exception>
+#include <stdexcept>
 class User{
     protected:
     static int idCounter;
@@ -12,10 +13,11 @@ class User{
     std::string password;
     
     public:
-    User(const std::string& username,const std::string& password);
+    User(const std::string& username, const std::string& password);
     void logout();
     const std::string& getName()const;
     const std::string& getPass()const;
+    //virtual void saveToFile(ifstream& is)=0;
     void changePassword(const std::string& newPassword);
     virtual void profileInfo()const=0;
     
