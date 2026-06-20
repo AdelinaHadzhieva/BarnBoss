@@ -1,6 +1,7 @@
 #pragma once
 #include "user.h"
 #include "../boards/taskBoard.h"
+#include <fstream>
 
 class TaskManager:public User{
     private:
@@ -16,5 +17,8 @@ class TaskManager:public User{
     void showTasks(const TaskBoard& taskBoard)const;
     void addTask(TaskBoard& taskBoard, Products requiredProduct, int quantity,int rewardBalance,int rewardScore);
     void removeTask(TaskBoard& taskBoard, int taskId);
+
+    void save(std::ofstream& out) const;
+    void load(std::ifstream& in);
 
 };

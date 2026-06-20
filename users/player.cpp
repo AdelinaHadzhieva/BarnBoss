@@ -54,7 +54,7 @@
     void Player::addAnimal(int animalId){
         try{
             farm.addAnimal(animalId);
-            barn.remove(animalId + 4, 1);//needs rewriting of products enum
+            barn.remove(animalId + 4, 1);
             advanceTurn();
         }
         catch(const std::exception& e){
@@ -133,3 +133,21 @@
         return other.id <=> id;
 
     }
+
+    
+
+void Player::save(std::ofstream& out) const {
+    
+    out << username << " " << password << " " << balance << " " << score << " " << currentCycles << "\n";
+    
+    barn.save(out);
+    farm.save(out);
+}
+
+void Player::load(std::ifstream& in) {
+    
+    in >> username >> password >> balance >> score >> currentCycles;
+    
+    barn.load(in);
+    farm.load(in);
+}

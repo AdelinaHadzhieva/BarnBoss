@@ -42,4 +42,26 @@ void Barn::remove(int productID, int qty){
     }
     else throw std::out_of_range("This product ID doesn't exist!\n");
 }
+
+
+void Barn::save(std::ofstream& out) const {
+    
+    out << barn.size() << "\n";
+    
+    for (const auto& [product, qty] : barn) {
+        out << toID(product) << " " << qty << "\n";
+    }
+}
+
+void Barn::load(std::ifstream& in) {
+    barn.clear(); 
+    int size;
+    if (in >> size) {
+        for (int i = 0; i < size; ++i) {
+            int prodId, qty;
+            in >> prodId >> qty;
+            barn[productKey(prodId).value()] = qty; 
+        }
+    }
+}
     

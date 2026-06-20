@@ -3,6 +3,7 @@
 #include <print>
 #include <exception>
 #include "products.h"
+#include <fstream>
 enum class Plants{  WheatSeed=1, CornSeed=2 };
 enum class Animals { Chicken=3, Cow=4};
 struct Plant{
@@ -42,4 +43,7 @@ class Farm{
     void harvestAnimals();
     void advanceCycle();
     void info()const;
+
+    void save(std::ofstream& out) const;
+    void load(std::ifstream& in);
 };

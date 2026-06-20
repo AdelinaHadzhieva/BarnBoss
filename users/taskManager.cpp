@@ -31,3 +31,7 @@ void TaskManager::removeTask(TaskBoard& taskBoard,int taskId){
     taskBoard.remove(taskId);
     
 }
+
+
+void TaskManager::save(std::ofstream& out) const { out << username << " " << password << "\n"; }
+void TaskManager::load(std::ifstream& in) { in >> username >> password; }

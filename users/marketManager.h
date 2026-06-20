@@ -1,6 +1,7 @@
 #pragma once
 #include "user.h"
 #include "../storage/market.h"
+#include <fstream>
 class MarketManager:public User{
     private:
     static bool MarketManagerExists;
@@ -14,4 +15,7 @@ class MarketManager:public User{
     void openMarketCatalog(const Market& market)const;
     void restock( Market& market,int productId, int quantity);
     void changePrice( Market& market,int productId, int newPrice);
+
+    void save(std::ofstream& out) const;
+    void load(std::ifstream& in);
 };

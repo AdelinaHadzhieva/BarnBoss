@@ -3,6 +3,8 @@
 #include "../storage/products.h"
 #include <exception>
 #include <print>
+#include <fstream>
+#include <algorithm>
 
 struct Task{
     static int idCounter;
@@ -22,4 +24,6 @@ class TaskBoard{
     const Task& getTask(int ID)const;
     void remove(int id);
     void add(const Products& requiredProduct, int quantity, int rewardBalance, int rewardScore);
+    void save(std::ofstream& out) const;
+    void load(std::ifstream& in);
 };

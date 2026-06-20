@@ -20,7 +20,7 @@ class GameSystem{
 
     UserType currentUser = UserType::Guest;
 
-    GameSystem() = default;
+    GameSystem() ;
     GameSystem(const GameSystem& ) = delete;
     GameSystem& operator=(const GameSystem&) = delete;
 
@@ -38,7 +38,6 @@ class GameSystem{
 
     void Register(const std::string& username, const std::string& password, const std::string& type);
     void login(const std::string& username,const std::string& password);
-    void saveToFile()const;
     void loadFromFile();
     void exit();
     void run();

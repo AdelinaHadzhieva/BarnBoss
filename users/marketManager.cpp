@@ -37,3 +37,6 @@ void MarketManager::changePrice(Market& market,int productId, int newPrice){
     }
 
 }
+
+void MarketManager::save(std::ofstream& out) const { out << username << " " << password << "\n"; }
+void MarketManager::load(std::ifstream& in) { in >> username >> password; }

@@ -64,3 +64,22 @@ void Market::remove(int productId, int quantity){
     }
     else throw std::out_of_range("This product ID doesn't exist!\n");
 }
+
+void Market::save(std::ofstream& out) const {
+    out << market.size() << "\n";
+    for (const auto& [product, details] : market) {
+        out << static_cast<int>(product) << " " << details.quantity << " " << details.price << "\n";
+    }
+}
+
+void Market::load(std::ifstream& in) {
+    market.clear();
+    int size;
+    if (in >> size) {
+        for (int i = 0; i < size; ++i) {
+            int prodId, qty, price;
+            in >> prodId >> qty >> price;
+            market[static_cast<Products>(prodId)] = {qty, price};
+        }
+    }
+}

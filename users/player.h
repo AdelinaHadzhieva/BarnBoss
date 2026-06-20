@@ -1,5 +1,6 @@
 #pragma once
 #include <compare>
+#include <fstream>
 #include "user.h"
 #include "../storage/barn.h"
 #include "../storage/farm.h"
@@ -33,4 +34,7 @@ public:
     void showTaskBoard(const TaskBoard& taskBoard)const;
     void completeTask(TaskBoard& taskBoard, int taskId);
     std::strong_ordering operator<=> (const Player& other)const;
+
+    void save(std::ofstream& out) const;
+    void load(std::ifstream& in);
 };

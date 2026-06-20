@@ -1,6 +1,8 @@
 #include "gameSystem.h"
 #include <sstream>
-
+GameSystem::GameSystem() {
+    loadFromFile();
+}
 GameSystem& GameSystem::getInstance(){
     static GameSystem instance;
     return instance;
@@ -98,11 +100,101 @@ void GameSystem::login(const std::string& username, const std::string& password)
     }
 }
     
-void GameSystem::exit(){
-    //files
-    std::print("Game save successfully!\nGoodbye!");
-}
+void GameSystem::exit() {
+    std::ofstream outFile("savegame.txt");
+    if (!outFile) {
+        std::print("Error: Could not create save file!\n");
+        return;
+    }
+
     
+    if (marketManager) {
+        outFile << "---MARKET_MANAGER---\n1\n";
+        marketManager->save(outFile);
+    } else {
+        outFile << "---MARKET_MANAGER---\n0\n";
+    }
+
+    if (taskManager) {
+        outFile << "---TASK_MANAGER---\n1\n";
+        taskManager->save(outFile);
+    } else {
+        outFile << "---TASK_MANAGER---\n0\n";
+    }
+
+    
+    outFile << "---MARKET---\n";
+    market.save(outFile);
+
+    outFile << "---TASKBOARD---\n";
+    taskBoard.save(outFile);
+
+    
+    outFile << "---PLAYERS---\n";
+    outFile << players.size() << "\n";
+    for (const auto& player : players) {
+        player->save(outFile);
+    }
+
+    outFile.close();
+    std::print("Game saved successfully!\nGoodbye!\n");
+}
+
+
+
+void GameSystem::loadFromFile() {
+    std::ifstream inFile("savegame.txt");
+    
+    
+    if (!inFile) {
+        std::print("No save file found. Starting a new world...\n");
+        return; 
+    }
+
+    std::string dummyHeader;
+    int exists;
+
+    
+    inFile >> dummyHeader >> exists; 
+    if (exists == 1) {
+        
+        marketManager = std::make_unique<MarketManager>("", "123");
+        marketManager->load(inFile);
+    }
+
+   
+    inFile >> dummyHeader >> exists; 
+    if (exists == 1) {
+        taskManager = std::make_unique<TaskManager>("", "123");
+        taskManager->load(inFile);
+    }
+
+    
+    inFile >> dummyHeader; 
+    market.load(inFile);
+
+    inFile >> dummyHeader; 
+    taskBoard.load(inFile);
+
+    
+    inFile >> dummyHeader; 
+    int numPlayers;
+    
+    if (inFile >> numPlayers) {
+        for (int i = 0; i < numPlayers; ++i) {
+            
+            auto p = std::make_unique<Player>("", "123"); 
+            
+            p->load(inFile); 
+            
+            players.push_back(std::move(p));
+        }
+    }
+
+    inFile.close();
+    std::print("Game loaded successfully!\n");
+}
+
 void GameSystem::run(){
     std::string command;
     std::vector<std::string> tokens;
@@ -110,6 +202,7 @@ void GameSystem::run(){
     std::print("========================================\n");
     std::print("               BARN BOSS                \n");
     std::print("========================================\n");
+
     while(true)
     {
         
@@ -117,6 +210,9 @@ void GameSystem::run(){
                 std::cout<<"> ";
                 std::getline(std::cin,command);
                 tokens=split(command);
+                if (tokens.empty()) {
+                    continue; 
+                }
                 
                 command=tokens[0];
                 if(command == "exit"){
@@ -159,6 +255,13 @@ void GameSystem::run(){
                     scoreBoard.scoreBoardInfo(players);
                     continue;
                 }
+                if( command == "logout"){
+                    currentUser = UserType::Guest;
+                    std::print("========================================\n");
+                    std::print("               BARN BOSS                \n");
+                    std::print("========================================\n");
+                    continue;
+                }
 
             
                 std::unique_ptr<ICommand> cmd = CommandFactory::create(tokens, *this);
@@ -172,18 +275,9 @@ void GameSystem::run(){
             catch (const std::exception& e) {
                 std::print("Error: {}\n", e.what());
             }
-
-            if( command == "logout"){
-                currentUser = UserType::Guest;
-                std::print("========================================\n");
-                std::print("               BARN BOSS                \n");
-                std::print("========================================\n");
-                continue;
-            }
-            
-        }
-            
     }
+            
+}
 
     
 

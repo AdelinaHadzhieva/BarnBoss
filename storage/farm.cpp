@@ -67,5 +67,62 @@ void Farm::harvestAnimals(){
     std::erase_if(farmland, [](const Animal& animal){return animal.currentCycle==animal.requiredCycles;});
 }
 void Farm::info()const{
-    std::print("FarmLand Capacity: {}\nCropLand Capacity: {}\nFarmLand:",farmlandCapacity, croplandCapacity);//to do
+    std::print("FarmLand Capacity: {}\nCropLand Capacity: {}\nFarmLand:",farmlandCapacity, croplandCapacity);
+}
+
+
+
+void Farm::save(std::ofstream& out) const {
+    
+    out << croplandCapacity << " " << farmlandCapacity << "\n";
+    
+    
+    out << cropland.size() << "\n";
+    for (const auto& plant : cropland) {
+        out << plant.id << " " << static_cast<int>(plant.name) << " " 
+            << plant.price << " " << plant.requiredCycles << " " 
+            << static_cast<int>(plant.product) << " " << plant.currentCycle << "\n";
+    }
+
+    
+    out << farmland.size() << "\n";
+    for (const auto& animal : farmland) {
+        out << animal.id << " " << static_cast<int>(animal.name) << " " 
+            << animal.price << " " << animal.requiredCycles << " " 
+            << static_cast<int>(animal.product) << " " << animal.currentCycle << "\n";
+    }
+}
+
+void Farm::load(std::ifstream& in) {
+    cropland.clear();
+    farmland.clear();
+
+    
+    in >> croplandCapacity >> farmlandCapacity;
+
+    
+    int cropSize;
+    if (in >> cropSize) {
+        for (int i = 0; i < cropSize; ++i) {
+            Plant p;
+            int nameInt, productInt;
+            in >> p.id >> nameInt >> p.price >> p.requiredCycles >> productInt >> p.currentCycle;
+            p.name = static_cast<Plants>(nameInt);
+            p.product = static_cast<Products>(productInt);
+            cropland.push_back(p);
+        }
+    }
+
+    
+    int farmSize;
+    if (in >> farmSize) {
+        for (int i = 0; i < farmSize; ++i) {
+            Animal a;
+            int nameInt, productInt;
+            in >> a.id >> nameInt >> a.price >> a.requiredCycles >> productInt >> a.currentCycle;
+            a.name = static_cast<Animals>(nameInt);
+            a.product = static_cast<Products>(productInt);
+            farmland.push_back(a);
+        }
+    }
 }

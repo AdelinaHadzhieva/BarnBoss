@@ -43,3 +43,33 @@ void TaskBoard::remove(int taskId){
     }
     
 }
+
+
+void TaskBoard::save(std::ofstream& out) const {
+    out << taskBoard.size() << "\n";
+    for (const auto& task : taskBoard) {
+        out << task.id << " " << static_cast<int>(task.requiredProduct) << " " 
+            << task.requiredQuantity << " " << task.rewardBalance << " " << task.rewardScore << "\n";
+    }
+}
+
+void TaskBoard::load(std::ifstream& in) {
+    taskBoard.clear();
+    int size;
+    int maxId = 0; 
+    
+    if (in >> size) {
+        for (int i = 0; i < size; ++i) {
+            int id, productInt, qty, bal, score;
+            in >> id >> productInt >> qty >> bal >> score;
+            
+            
+            Task t(static_cast<Products>(productInt), qty, bal, score);
+            t.id = id; 
+            taskBoard.push_back(t);
+            
+            maxId = std::max(maxId, id);
+        }
+    }
+    Task::idCounter = maxId; 
+}
